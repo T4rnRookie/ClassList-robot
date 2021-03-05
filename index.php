@@ -6,11 +6,10 @@ function todayWeek(){
  $week = array('日', '一', '二', '三', '四', '五', '六'); //规范化周日的表达
  $d = ceil($day / 7); //计算是第几个星期几
  $str = date("Y年n月j日") . " 星期" . $week[$wk_day] ;
- $Date_1=date("Y-m-d");
- $Date_2="2021-3-01";
- $d1=strtotime($Date_1);
- $d2=strtotime($Date_2);
- $Days=round(($d2-$d1)/3600/24/7)+1;
+$ddate = date("Y-m-d");
+$date = new DateTime($ddate);
+$week2 = $date->format("W");
+$Days = $week2-8;
  $week2= "今天是本学期的第".$Days."周";
  return $str."\n".$week2."\n";
 
@@ -21,73 +20,71 @@ $str = '';
  $class=array('毛概（B307)','体育（操场)','操作系统(B306)','计网(1教505)','系统设计(B506)','系统设计(B304)','形势政策(C603)');
  $classTime=array('8:15 ','10:15 ','13:40 ','15:40 ');
  $wk_day = date('w');
- $Date_1=date("Y-m-d");
- $Date_2="2021-3-01";
- $d1=strtotime($Date_1);
- $d2=strtotime($Date_2);
- $Days=round(($d2-$d1)/3600/24/7)+1;
- if($Days%2!=0)
- {  
+$ddate = date("Y-m-d");
+$date = new DateTime($ddate);
+$week = $date->format("W")-8;
+ if($week%2!=0)
+ {	
      switch ($wk_day) {
-        case '1':
-            $str = $classTime[1].$class[2]."\n".$classTime[2].$class[1];
-            return $str;
+     	case '1':
+     		$str = $classTime[1].$class[2]."\n".$classTime[2].$class[1];
+     		return $str;
 
-        case '2':
+     	case '2':
             $str = $classTime[2].$class[0];
             return $str;
 
-        case '3':
+     	case '3':
             $str = $classTime[0].$class[3]."\n".$classTime[1].$class[4]."\n".$classTime[2].$class[2];
             return $str;
-           
-            
-        case '4':
+     	   
+     		
+     	case '4':
             $str = $classTime[0].$class[0];
             return $str;
-          
-        case '5':
+     	  
+     	case '5':
             $str = $classTime[2].$class[5];
             return $str;
-           
+     	   
 
-        default:
-            $str = 'Enjoy your Weekend ^_^';
-            return $str;
-            
+     	default:
+     		$str = 'Enjoy your Weekend ^_^';
+     		return $str;
+     		
      }
  }
 else
 {
  switch ($wk_day) {
-        case '星期一':
-            $str = "\n".$classTime[1].$class[2]."\n".$classTime[2].$class[1];
-            return $str;
-            
+     	case '1':
+     		$str = "\n".$classTime[1].$class[2]."\n".$classTime[2].$class[1];
+     		return $str;
+     		
 
-        case '星期二':
+     	case '2':
             $str = $classTime[2].$class[0];
             return $str;
-            
+     	    
 
-        case '星期三':
+     	case '3':
             $str = $classTime[0].$class[3]."\n".$classTime[1].$class[4]."\n".$classTime[2].$class[2];
             return $str;
-            
-            
-        case '星期四':
+     	    
+     		
+     	case '4':
             $str = $classTime[0].$class[0];
             return $str;
-            
-        case '星期五':
+     	    
+     	case '5':
             $str = $classTime[1].$class[2]."\n".$classTime[3].$class[5];
             return $str;
-           
+     	   
 
-        default:
-            $str = 'Enjoy your Weekend ^_^';
-            return $str;
-            
+     	default:
+     		$str = 'Enjoy your Weekend ^_^';
+     		return $str;
+     		
      }
 
 
@@ -96,10 +93,10 @@ else
 }
 function huibao()
 {
-    return "\n"."第9周到第十二周 星期一最后一节有形势与政策 C603 ";
+	return "\n"."第9周到第十二周 星期一最后一节有形势与政策 C603 ";
 }
 
-function sc_send($text='' ,$desp = '',$key = 'yourkey')
+function sc_send($text='' ,$desp = '',$key = '你自己的生成key')
 {
     $postdata = http_build_query( array( 'text' => $text, 'desp' => $desp ));
     $opts = array('http' =>
